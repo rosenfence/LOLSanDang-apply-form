@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .button {
+    border: 2px solid #bbb;
+    background-color: rgba(59, 255, 137, 1);
+  }
+
+  .form-div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}
