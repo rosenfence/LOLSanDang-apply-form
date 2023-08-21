@@ -1,9 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import Provider from './Provider';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: '롤산당 롤인원 모집',
@@ -12,9 +9,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='en'>
-      <body className={inter.className}>
-        <Provider>{children}</Provider>
+    <html lang='ko'>
+      <body className='flex justify-center bg-[rgba(137,59,255,1)]'>
+        <div className='flex-center w-full max-w-xl h-[100dvh] bg-white'>
+          <Provider>{children}</Provider>
+        </div>
       </body>
     </html>
   );
