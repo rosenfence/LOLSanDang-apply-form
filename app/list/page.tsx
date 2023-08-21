@@ -1,5 +1,6 @@
 import React from 'react';
 import Lists from './Lists';
+import Link from 'next/link';
 
 const List = () => {
   return (
@@ -8,7 +9,9 @@ const List = () => {
       <article>
         <Lists />
       </article>
-      <button>새 모집하기</button>
+      <Link href='/publish'>
+        <button className='button'>새 모집하기</button>
+      </Link>
     </main>
   );
 };
