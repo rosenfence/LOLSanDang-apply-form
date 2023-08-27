@@ -26,10 +26,37 @@ const Lists = () => {
       </>
     );
 
+  const gameTypeChanger = (code: string) => {
+    let result = new String();
+    switch (code) {
+      case 'SR':
+        result = '소환사의 협곡';
+        break;
+      case 'HA':
+        result = '칼바람 나락';
+        break;
+      case 'TFT':
+        result = '전략적 팀 전투';
+        break;
+    }
+    return result;
+  };
+
+  const dateChanger = (str: string) => {
+    return str.substring(5);
+  };
+
   return (
     <ul>
       {data?.map((list, i) => {
-        return <li key={i}>{list.title}</li>;
+        return (
+          <li key={i}>
+            <span>{list.title}</span>
+            <span>{gameTypeChanger(list.gameType)}</span>
+            <span>{dateChanger(list.date)}</span>
+            <span>{list.time}</span>
+          </li>
+        );
       })}
     </ul>
   );
