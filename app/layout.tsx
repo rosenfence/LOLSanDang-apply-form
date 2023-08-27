@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import Provider from './Provider';
+import Nav from './Nav';
 
 export const metadata: Metadata = {
   title: '롤산당 롤인원 모집',
@@ -11,8 +12,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='ko'>
       <body className='flex justify-center bg-[rgba(137,59,255,1)]'>
-        <div className='flex-center w-full max-w-xl h-[100dvh] bg-white'>
+        <div className='relative pt-5 w-full max-w-xl wrapper overflow-scroll bg-white px-8'>
           <Provider>{children}</Provider>
+          <Nav />
         </div>
       </body>
     </html>
