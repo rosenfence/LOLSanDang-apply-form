@@ -9,6 +9,11 @@
     align-items: center;
   }
 
+  .wrapper {
+    height: 100dvh;
+    padding-bottom: 2.25rem;
+  }
+
   .button {
     border: 2px solid #bbb;
     background-color: rgba(59, 255, 137, 1);
