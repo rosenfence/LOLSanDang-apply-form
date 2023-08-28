@@ -17,6 +17,8 @@ const PublishForm = () => {
   const [tier, setTier] = useState<string>('C');
   const [position, setPosition] = useState<PositionType>();
 
+  const [submitPermitted, setSubmitPermitted] = useState<boolean>(false);
+
   const router = useRouter();
 
   // title,content, date, time, nickname EventListener
@@ -25,6 +27,7 @@ const PublishForm = () => {
     switch (target) {
       case 'title':
         setTitle(e.target.value);
+
         break;
       case 'content':
         setContent(e.target.value);
@@ -39,16 +42,19 @@ const PublishForm = () => {
         setNickname(e.target.value);
         break;
     }
+    isVaild();
   };
 
   // type EventListener
   const handleClickForInput = (e: React.MouseEvent<HTMLInputElement>) => {
     setType((e.target as HTMLInputElement).value);
+    isVaild();
   };
 
   // tier EventListener
   const handleChangeForSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setTier(e.target.value);
+    isVaild();
   };
 
   // initial position object
@@ -64,6 +70,8 @@ const PublishForm = () => {
   const handleClickToArray = (e: React.MouseEvent<HTMLInputElement>) => {
     const pos = (e.target as HTMLInputElement).id;
     positionObj[pos] = !positionObj[pos];
+    console.log(positionObj);
+    isVaild();
   };
 
   // position vaildation function
@@ -99,33 +107,36 @@ const PublishForm = () => {
     },
   });
 
-  // submit validater
-  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  //  validater
+  const isVaild = () => {
     if (title === '') {
-      alert('모집 제목을 입력해주세요.');
+      setSubmitPermitted(false);
       return;
     } else if (date === '') {
-      alert('모일 날짜를 입력해주세요.');
+      setSubmitPermitted(false);
       return;
     } else if (time === '') {
-      alert('게임할 시간을 입력해주세요.');
+      setSubmitPermitted(false);
       return;
     } else if (type === '') {
-      alert('게임 타입을 선택해주세요.');
+      setSubmitPermitted(false);
       return;
     } else if (nickname === '') {
-      alert('게임 닉네임을 입력해주세요.');
+      setSubmitPermitted(false);
       return;
     } else if (type === 'SR') {
       if (!isValidPosition(positionObj)) {
-        alert('희망 포지션을 1가지 이상 선택해주세요.');
+        setSubmitPermitted(false);
         return;
       }
     }
+    setSubmitPermitted(true);
+  };
 
+  // submit
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     setPosition(positionObj);
-
     mutate();
     alert('정상적으로 등록되었습니다');
     router.push('/list');
@@ -246,7 +257,10 @@ const PublishForm = () => {
         onClick={(e) => {
           handleSubmit(e);
         }}
-        className='button'
+        className={
+          submitPermitted ? 'button' : 'border-2 bg-gray-200 text-gray-500 cursor-not-allowed'
+        }
+        disabled={submitPermitted ? false : true}
       >
         작성하기
       </button>
