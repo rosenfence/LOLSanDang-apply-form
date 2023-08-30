@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Detail = (props: { params: { id: string } }) => {
-  console.log(props.params);
+const Detail = (props: { params: string }) => {
+  const id = props.params;
   return <div>상세페이지</div>;
 };
 
