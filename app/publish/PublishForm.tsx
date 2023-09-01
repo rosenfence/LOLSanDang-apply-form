@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { PositionType } from '@/interface/interface';
 import Link from 'next/link';
 import { useMutation } from '@tanstack/react-query';
@@ -18,6 +18,8 @@ const PublishForm = () => {
   const [position, setPosition] = useState<PositionType>();
 
   const [submitPermitted, setSubmitPermitted] = useState<boolean>(false);
+
+  const [today, setToday] = useState<string>('');
 
   const router = useRouter();
 
@@ -142,6 +144,19 @@ const PublishForm = () => {
     router.push('/list');
   };
 
+  // set min date
+  const setMinDate = () => {
+    let now_utc = Date.now();
+    let timeOff = new Date().getTimezoneOffset() * 60000;
+    let today = new Date(now_utc - timeOff).toISOString().split('T')[0];
+    setToday(today);
+  };
+
+  // useEffect
+  useLayoutEffect(() => {
+    setMinDate();
+  }, []);
+
   return (
     <>
       <div className='form-div'>
@@ -164,7 +179,7 @@ const PublishForm = () => {
       </div>
       <div className='form-div'>
         <label htmlFor='date'>날짜</label>
-        <input onChange={(e) => handleChangeForInput(e)} id='date' type='date' min='' max='' />
+        <input onChange={(e) => handleChangeForInput(e)} id='date' type='date' min={today} max='' />
       </div>
       <div className='form-div'>
         <label htmlFor='time'>시간</label>
