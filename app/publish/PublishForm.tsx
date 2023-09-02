@@ -15,7 +15,13 @@ const PublishForm = () => {
 
   const [nickname, setNickname] = useState<string>('');
   const [tier, setTier] = useState<string>('C');
-  const [position, setPosition] = useState<PositionType>();
+  const [position, setPosition] = useState<PositionType>({
+    TOP: false,
+    JUG: false,
+    MID: false,
+    ADC: false,
+    SUP: false,
+  });
 
   const [submitPermitted, setSubmitPermitted] = useState<boolean>(false);
 
@@ -29,22 +35,25 @@ const PublishForm = () => {
     switch (target) {
       case 'title':
         setTitle(e.target.value);
-
+        isVaild();
         break;
       case 'content':
         setContent(e.target.value);
+        isVaild();
         break;
       case 'date':
         setDate(e.target.value);
+        isVaild();
         break;
       case 'time':
         setTime(e.target.value);
+        isVaild();
         break;
       case 'nickname':
         setNickname(e.target.value);
+        isVaild();
         break;
     }
-    isVaild();
   };
 
   // type EventListener
@@ -59,20 +68,12 @@ const PublishForm = () => {
     isVaild();
   };
 
-  // initial position object
-  const positionObj: PositionType = {
-    TOP: false,
-    JUG: false,
-    MID: false,
-    ADC: false,
-    SUP: false,
-  };
-
   // object changer
   const handleClickToArray = (e: React.MouseEvent<HTMLInputElement>) => {
     const pos = (e.target as HTMLInputElement).id;
-    positionObj[pos] = !positionObj[pos];
-    console.log(positionObj);
+    let posObj = position;
+    posObj[pos] = !posObj[pos];
+    setPosition(posObj);
     isVaild();
   };
 
@@ -127,7 +128,7 @@ const PublishForm = () => {
       setSubmitPermitted(false);
       return;
     } else if (type === 'SR') {
-      if (!isValidPosition(positionObj)) {
+      if (!isValidPosition(position)) {
         setSubmitPermitted(false);
         return;
       }
@@ -138,7 +139,6 @@ const PublishForm = () => {
   // submit
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setPosition(positionObj);
     mutate();
     alert('정상적으로 등록되었습니다');
     router.push('/list');
