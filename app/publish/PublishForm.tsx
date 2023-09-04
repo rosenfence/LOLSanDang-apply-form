@@ -1,5 +1,5 @@
 'use client';
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { PositionType } from '@/interface/interface';
 import Link from 'next/link';
 import { useMutation } from '@tanstack/react-query';
@@ -35,23 +35,18 @@ const PublishForm = () => {
     switch (target) {
       case 'title':
         setTitle(e.target.value);
-        isVaild();
         break;
       case 'content':
         setContent(e.target.value);
-        isVaild();
         break;
       case 'date':
         setDate(e.target.value);
-        isVaild();
         break;
       case 'time':
         setTime(e.target.value);
-        isVaild();
         break;
       case 'nickname':
         setNickname(e.target.value);
-        isVaild();
         break;
     }
   };
@@ -59,13 +54,11 @@ const PublishForm = () => {
   // type EventListener
   const handleClickForInput = (e: React.MouseEvent<HTMLInputElement>) => {
     setType((e.target as HTMLInputElement).value);
-    isVaild();
   };
 
   // tier EventListener
   const handleChangeForSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setTier(e.target.value);
-    isVaild();
   };
 
   // object changer
@@ -74,7 +67,6 @@ const PublishForm = () => {
     let posObj = position;
     posObj[pos] = !posObj[pos];
     setPosition(posObj);
-    isVaild();
   };
 
   // position vaildation function
@@ -152,10 +144,15 @@ const PublishForm = () => {
     setToday(today);
   };
 
-  // useEffect
+  // useLayoutEffect
   useLayoutEffect(() => {
     setMinDate();
   }, []);
+
+  // useEffect
+  useEffect(() => {
+    isVaild();
+  }, [title, date, time, type, nickname, position]);
 
   return (
     <>
