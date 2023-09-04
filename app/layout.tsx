@@ -12,8 +12,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='ko'>
       <body className='flex justify-center bg-[rgba(137,59,255,1)]'>
-        <div className='relative pt-5 w-full max-w-xl wrapper overflow-scroll bg-white px-8'>
-          <Provider>{children}</Provider>
+        <div className='relative w-full max-w-xl'>
+          <div className='pt-5 w-full wrapper overflow-scroll scrollbar-hidden bg-white px-8'>
+            <Provider>{children}</Provider>
+          </div>
           <Nav />
         </div>
       </body>
