@@ -3,6 +3,7 @@ import React from 'react';
 import { ListType } from '@/interface/interface';
 import { getLists } from '@/function/getLists';
 import { useQuery } from '@tanstack/react-query';
+import Link from 'next/link';
 
 const Lists = () => {
   const { isLoading, error, data } = useQuery<ListType[]>({
@@ -51,10 +52,12 @@ const Lists = () => {
       {data?.map((list, i) => {
         return (
           <li key={i}>
-            <span>{list.title}</span>
-            <span>{gameTypeChanger(list.gameType)}</span>
-            <span>{dateChanger(list.date)}</span>
-            <span>{list.time}</span>
+            <Link href={`/detail/${list._id}`}>
+              <span>{list.title}</span>
+              <span>{gameTypeChanger(list.gameType)}</span>
+              <span>{dateChanger(list.date)}</span>
+              <span>{list.time}</span>
+            </Link>
           </li>
         );
       })}
