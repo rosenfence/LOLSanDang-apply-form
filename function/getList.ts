@@ -5,7 +5,6 @@ export async function getList(listId: string) {
   await fetch(GET_LIST_URL)
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
       response = data;
     })
     .catch((err) => console.log(err));
