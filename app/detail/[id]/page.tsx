@@ -2,7 +2,7 @@ import React from 'react';
 import List from './List';
 
 const Detail = (props: { params: string }) => {
-  const id = props.params;
+  const id = props.params.id;
 
   return (
     <div>

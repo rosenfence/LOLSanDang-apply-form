@@ -3,7 +3,6 @@ import React from 'react';
 import { ListType } from '@/interface/interface';
 import { getList } from '@/function/getList';
 import { useQuery } from '@tanstack/react-query';
-import Link from 'next/link';
 
 const List = ({ id }: { id: string }) => {
   const { isLoading, error, data } = useQuery<ListType>({
@@ -27,12 +26,14 @@ const List = ({ id }: { id: string }) => {
       </>
     );
 
+  console.log(data);
+
   return (
-    <Link href={`/detail/${list._id}`}>
+    <>
       <span>{data?.title}</span>
       <span>{data?.content}</span>
       <span>{data?.gameType}</span>
-    </Link>
+    </>
   );
 };
 
