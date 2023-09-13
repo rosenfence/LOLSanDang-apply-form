@@ -6,6 +6,7 @@ export async function postLists(req: requestPostListType) {
   await fetch(POST_LISTS_URL, {
     method: 'POST',
     body: JSON.stringify(req),
+    cache: 'no-store',
   })
     .then((res) => res.json())
     .then((data) => {

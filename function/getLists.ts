@@ -4,7 +4,7 @@ const GET_LISTS_URL = '/api/lists/getLists';
 
 export async function getLists() {
   let response: ListType[] = new Array();
-  await fetch(GET_LISTS_URL)
+  await fetch(GET_LISTS_URL, { cache: 'no-store' })
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
